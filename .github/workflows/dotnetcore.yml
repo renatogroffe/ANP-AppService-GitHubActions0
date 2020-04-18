@@ -1,10 +1,6 @@
 name: .NET Core
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push]
 
 jobs:
   build:
@@ -12,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.101
-
+        dotnet-version: 3.0.101
+    
     - name: Build with dotnet
       run: dotnet build ./APIContagem --configuration Release
 
@@ -32,5 +28,5 @@ jobs:
     - name: Azure WebApp
       uses: Azure/webapps-deploy@v1
       with:
-        app-name: groffegithubactions
+        app-name: groffe-githubactions
         package: './app'
